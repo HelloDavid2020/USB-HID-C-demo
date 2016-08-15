@@ -331,7 +331,32 @@ namespace HID_PnP_Demo
 			//If it is connected and present, we should open read and write handles to the device so we can communicate with it later.
 			//If it was not connected, we will have to wait until the user plugs the device in, and the WM_DEVICECHANGE callback function can process
 			//the message and again search for the device.
-			if(CheckIfPresentAndGetUSBDevicePath())	//Check and make sure at least one device with matching VID/PID is attached
+            connnect2usb();
+
+			ReadWriteThread.RunWorkerAsync();	//Recommend performing USB read/write operations in a separate thread.  Otherwise,
+												//the Read/Write operations are effectively blocking functions and can lock up the
+												//user interface if the I/O operations take a long time to complete.
+
+            //-------------------------------------------------------END CUT AND PASTE BLOCK-------------------------------------------------------------------------------------
+            //-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        }
+
+
+        //-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        //-------------------------------------------------------BEGIN CUT AND PASTE BLOCK-----------------------------------------------------------------------------------
+
+        //FUNCTION:	CheckIfPresentAndGetUSBDevicePath()
+        //PURPOSE:	Check if a USB device is currently plugged in with a matching VID and PID
+        //INPUT:	Uses globally declared String DevicePath, globally declared GUID, and the MY_DEVICE_ID constant.
+        //OUTPUT:	Returns BOOL.  TRUE when device with matching VID/PID found.  FALSE if device with VID/PID could not be found.
+        //			When returns TRUE, the globally accessable "DetailedInterfaceDataStructure" will contain the device path
+        //			to the USB device with the matching VID/PID.
+
+
+        private void connnect2usb()
+        {
+        
+            if(CheckIfPresentAndGetUSBDevicePath())	//Check and make sure at least one device with matching VID/PID is attached
 			{
 				uint ErrorStatusWrite;
 				uint ErrorStatusRead;
@@ -375,25 +400,11 @@ namespace HID_PnP_Demo
                 StatusBox_txtbx.BackColor = Color.Orange;
                 StatusBox_txtbx.Text = "Device not found, verify connect/correct firmware";
             }
-
-			ReadWriteThread.RunWorkerAsync();	//Recommend performing USB read/write operations in a separate thread.  Otherwise,
-												//the Read/Write operations are effectively blocking functions and can lock up the
-												//user interface if the I/O operations take a long time to complete.
-
-            //-------------------------------------------------------END CUT AND PASTE BLOCK-------------------------------------------------------------------------------------
-            //-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        
+        
         }
 
 
-        //-------------------------------------------------------------------------------------------------------------------------------------------------------------------
-        //-------------------------------------------------------BEGIN CUT AND PASTE BLOCK-----------------------------------------------------------------------------------
-
-        //FUNCTION:	CheckIfPresentAndGetUSBDevicePath()
-        //PURPOSE:	Check if a USB device is currently plugged in with a matching VID and PID
-        //INPUT:	Uses globally declared String DevicePath, globally declared GUID, and the MY_DEVICE_ID constant.
-        //OUTPUT:	Returns BOOL.  TRUE when device with matching VID/PID found.  FALSE if device with VID/PID could not be found.
-        //			When returns TRUE, the globally accessable "DetailedInterfaceDataStructure" will contain the device path
-        //			to the USB device with the matching VID/PID.
 
         bool CheckIfPresentAndGetUSBDevicePath()
         {
