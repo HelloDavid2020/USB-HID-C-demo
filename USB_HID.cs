@@ -810,31 +810,6 @@ namespace HID_PnP_Demo
                            }
                         
 
-                        //Check if this thread should send a Toggle LED(s) command to the firmware.  ToggleLEDsPending will get set
-                        //by the ToggleLEDs_btn click event handler function if the user presses the button on the form.
-                    //    if (ToggleLEDsPending == true)
-                    //    {
-                    //        if (Button_State == 0)
-                    //            Button_State = 1;
-                    //        else
-                    //            Button_State = 0;
-                    //        OUTBuffer[0] = 0;				//The first byte is the "Report ID" and does not get sent over the USB bus.  Always set = 0.
-                    //        OUTBuffer[1] = Convert.ToByte(Button_State);
-                    //        OUTBuffer[2] =Convert.ToByte( Button_State);			//0x80 is the "Toggle LED(s)" command in the firmware
-                    //        OUTBuffer[3] = Convert.ToByte(Button_State);
-                    //        for (uint i = 4; i < 65; i++)	//This loop is not strictly necessary.  Simply initializes unused bytes to
-                    //            OUTBuffer[i] = 0xFF;		//0xFF for lower EMI and power consumption when driving the USB cable.
-                    //        //Now send the packet to the USB firmware on the microcontroller
-                    //        WriteFile(WriteHandleToUSBDevice, OUTBuffer, 65, ref BytesWritten, IntPtr.Zero);	//Blocking function, unless an "overlapped" structure is used
-                    //        ToggleLEDsPending = false;
-                    //        textBox2.Text = "";
-                    //        if (ReadFileManagedBuffer(ReadHandleToUSBDevice, INBuffer, 65, ref BytesRead, IntPtr.Zero))		//Blocking function, unless an "overlapped" structure is used	
-                    //        {
-                    //            for (j = 0; j < BytesRead; j++)
-                    //                textBox2.Text = textBox2.Text + " " + INBuffer[j];
-                    //        }
-
-                        //}
                     } //end of: if(AttachedState == true)
                     else
                     {
@@ -869,11 +844,7 @@ namespace HID_PnP_Demo
         private void FormUpdateTimer_Tick(object sender, EventArgs e)
         {
             int i;
-            //-------------------------------------------------------------------------------------------------------------------------------------------------------------------
-            //-------------------------------------------------------BEGIN CUT AND PASTE BLOCK-----------------------------------------------------------------------------------
-            //This timer tick event handler function is used to update the user interface on the form, based on data
-            //obtained asynchronously by the ReadWriteThread and the WM_DEVICECHANGE event handler functions.
-
+           
             //Check if user interface on the form should be enabled or not, based on the attachment state of the USB device.
             if (AttachedState == true)
             {
@@ -881,34 +852,22 @@ namespace HID_PnP_Demo
                 StatusBox_txtbx.Text = "Device Found: AttachedState = TRUE";
                 //PushbuttonState_lbl.Enabled = true;	//Make the label no longer greyed out
                 ANxVoltage_lbl.Enabled = true;
-         
-               // textBox2.Text = "";
-               // for(i=0;i<65;i++)
-               //   textBox2.Text=textBox2.Text + display[i];
-            }
+              }
             if ((AttachedState == false) || (AttachedButBroken == true))
             {
                 //Device not available to communicate. Disable user interface on the form.
                 StatusBox_txtbx.Text = "Device Not Detected: Verify Connection/Correct Firmware";
                 //PushbuttonState_lbl.Enabled = false;	//Make the label no longer greyed out
                 ANxVoltage_lbl.Enabled = false;
-             
-                //PushbuttonState_lbl.Text = "Pushbutton State: Unknown";
+    
                 ADCValue = 0;
-                //progressBar1.Value = 0;
+
             }
 
             //Update the various status indicators on the form with the latest info obtained from the ReadWriteThread()
             if (AttachedState == true)
             {
-                //Update the pushbutton state label.
-                //if (PushbuttonPressed == false)
-                //    PushbuttonState_lbl.Text = "Pushbutton State: Not Pressed";		//Update the pushbutton state text label on the form, so the user can see the result 
-                //else
-                //    PushbuttonState_lbl.Text = "Pushbutton State: Pressed";			//Update the pushbutton state text label on the form, so the user can see the result 
-
-                //Update the ANxx/POT Voltage indicator value (progressbar)
-               // progressBar1.Value = (int)ADCValue;
+            
             }
             //-------------------------------------------------------END CUT AND PASTE BLOCK-------------------------------------------------------------------------------------
             //-------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -965,12 +924,6 @@ namespace HID_PnP_Demo
 
 
 
-
-        //private void chart1_Click(object sender, EventArgs e)
-        //{
-
-        //}
-
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
@@ -980,19 +933,6 @@ namespace HID_PnP_Demo
         {
             connnect2usb();
         }
-
-        //private void timer1_Tick(object sender, EventArgs e)
-        //{
-
-        //}
-
-        //private void progressBar1_Click(object sender, EventArgs e)
-        //{
-
-        //}
-        //-------------------------------------------------------END CUT AND PASTE BLOCK-------------------------------------------------------------------------------------
-        //-------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
 
     } //public partial class Form1 : Form
 } //namespace HID_PnP_Demo
