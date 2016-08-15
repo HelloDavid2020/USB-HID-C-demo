@@ -98,7 +98,7 @@ using System.Net.Mail;          //send mail
 
 namespace HID_PnP_Demo
 {
-    public partial class Form1 : Form
+    public partial class USB_HID : Form
     {
 
         //-------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -297,7 +297,7 @@ namespace HID_PnP_Demo
 
         //Need to check "Allow unsafe code" checkbox in build properties to use unsafe keyword.  Unsafe is needed to
         //properly interact with the unmanged C++ style APIs used to find and connect with the USB device.
-        public unsafe Form1()
+        public unsafe USB_HID()
         {
             InitializeComponent();
 
@@ -306,10 +306,10 @@ namespace HID_PnP_Demo
 			//Additional constructor code
 
             //Initialize tool tips, to provide pop up help when the mouse cursor is moved over objects on the form.
-            ANxVoltageToolTip.SetToolTip(this.ANxVoltage_lbl, "If using a board/PIM without a potentiometer, apply an adjustable voltage to the I/O pin.");
-            ANxVoltageToolTip.SetToolTip(this.progressBar1, "If using a board/PIM without a potentiometer, apply an adjustable voltage to the I/O pin.");
-            ToggleLEDToolTip.SetToolTip(this.ToggleLEDs_btn, "Sends a packet of data to the USB device.");
-            PushbuttonStateTooltip.SetToolTip(this.PushbuttonState_lbl, "Try pressing pushbuttons on the USB demo board/PIM.");
+            //ANxVoltageToolTip.SetToolTip(this.ANxVoltage_lbl, "If using a board/PIM without a potentiometer, apply an adjustable voltage to the I/O pin.");
+            //ANxVoltageToolTip.SetToolTip(this.progressBar1, "If using a board/PIM without a potentiometer, apply an adjustable voltage to the I/O pin.");
+            //ToggleLEDToolTip.SetToolTip(this.ToggleLEDs_btn, "Sends a packet of data to the USB device.");
+            //PushbuttonStateTooltip.SetToolTip(this.PushbuttonState_lbl, "Try pressing pushbuttons on the USB demo board/PIM.");
 
             //Register for WM_DEVICECHANGE notifications.  This code uses these messages to detect plug and play connection/disconnection events for USB devices
             DEV_BROADCAST_DEVICEINTERFACE DeviceBroadcastHeader = new DEV_BROADCAST_DEVICEINTERFACE();
@@ -367,10 +367,12 @@ namespace HID_PnP_Demo
 
             if (AttachedState == true)
             {
+                StatusBox_txtbx.BackColor = Color.LightGreen;
                 StatusBox_txtbx.Text = "Device Found, AttachedState = TRUE";
             }
             else
             {
+                StatusBox_txtbx.BackColor = Color.Orange;
                 StatusBox_txtbx.Text = "Device not found, verify connect/correct firmware";
             }
 
@@ -642,11 +644,7 @@ namespace HID_PnP_Demo
 
 
 
-        private void ToggleLEDs_btn_Click(object sender, EventArgs e)
-        {
-            	
-        }
-
+    
         private void ReadWriteThread_DoWork(object sender, DoWorkEventArgs e)
         {
             //-------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -795,13 +793,7 @@ namespace HID_PnP_Demo
                                       for (j = 0; j < BytesRead; j++)
                                             this.textBox2.Text = this.textBox2.Text + " " +INBuffer[j];
                                       ////System.DateTime currentTime = new System.DateTime();
-                                      chart1.Series["Series1"].Points.AddY(INBuffer[15] * 256 + INBuffer[14]);
-                                      if (lchartPoint > lcharPointSet)
-                                      {
-
-                                          chart1.ChartAreas[0].AxisX.Minimum = lchartPoint - lcharPointSet;
-                                          chart1.ChartAreas[0].AxisX.Maximum = lchartPoint;
-                                      }
+                                   
                                       
                                   }));
                            }
@@ -849,6 +841,11 @@ namespace HID_PnP_Demo
                     //re-establish communications based on the global AttachedState boolean variable used
                     //in conjunction with the WM_DEVICECHANGE messages to dyanmically respond to Plug and Play
                     //USB connection events.
+
+
+
+
+
                 }
 
 		    } //end of while(true) loop
@@ -871,9 +868,9 @@ namespace HID_PnP_Demo
             {
                 //Device is connected and ready to communicate, enable user interface on the form 
                 StatusBox_txtbx.Text = "Device Found: AttachedState = TRUE";
-                PushbuttonState_lbl.Enabled = true;	//Make the label no longer greyed out
+                //PushbuttonState_lbl.Enabled = true;	//Make the label no longer greyed out
                 ANxVoltage_lbl.Enabled = true;
-                ToggleLEDs_btn.Enabled = true;
+         
                // textBox2.Text = "";
                // for(i=0;i<65;i++)
                //   textBox2.Text=textBox2.Text + display[i];
@@ -882,23 +879,22 @@ namespace HID_PnP_Demo
             {
                 //Device not available to communicate. Disable user interface on the form.
                 StatusBox_txtbx.Text = "Device Not Detected: Verify Connection/Correct Firmware";
-                PushbuttonState_lbl.Enabled = false;	//Make the label no longer greyed out
+                //PushbuttonState_lbl.Enabled = false;	//Make the label no longer greyed out
                 ANxVoltage_lbl.Enabled = false;
-                ToggleLEDs_btn.Enabled = false;
-
-                PushbuttonState_lbl.Text = "Pushbutton State: Unknown";
+             
+                //PushbuttonState_lbl.Text = "Pushbutton State: Unknown";
                 ADCValue = 0;
-                progressBar1.Value = 0;
+                //progressBar1.Value = 0;
             }
 
             //Update the various status indicators on the form with the latest info obtained from the ReadWriteThread()
             if (AttachedState == true)
             {
                 //Update the pushbutton state label.
-                if (PushbuttonPressed == false)
-                    PushbuttonState_lbl.Text = "Pushbutton State: Not Pressed";		//Update the pushbutton state text label on the form, so the user can see the result 
-                else
-                    PushbuttonState_lbl.Text = "Pushbutton State: Pressed";			//Update the pushbutton state text label on the form, so the user can see the result 
+                //if (PushbuttonPressed == false)
+                //    PushbuttonState_lbl.Text = "Pushbutton State: Not Pressed";		//Update the pushbutton state text label on the form, so the user can see the result 
+                //else
+                //    PushbuttonState_lbl.Text = "Pushbutton State: Pressed";			//Update the pushbutton state text label on the form, so the user can see the result 
 
                 //Update the ANxx/POT Voltage indicator value (progressbar)
                // progressBar1.Value = (int)ADCValue;
@@ -956,214 +952,215 @@ namespace HID_PnP_Demo
             }
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            lcharPointSet = 100;
-            chart1.Series["Series1"].IsVisibleInLegend = false;
-            chart1.ChartAreas[0].AxisY.Minimum = 0;//YÏÔÊ¾·¶Î§
-            chart1.ChartAreas[0].AxisY.Maximum = 4095;
-            chart1.ChartAreas[0].AxisX.Minimum = 0;
-            chart1.ChartAreas[0].AxisX.Maximum = lcharPointSet;
-            
-        }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Byte[] OUTBuffer = new byte[65];	//Allocate a memory buffer equal to the OUT endpoint size + 1
-            Byte[] INBuffer = new byte[65];		//Allocate a memory buffer equal to the IN endpoint size + 1
-            uint BytesWritten = 0;
-            uint BytesRead = 0;
+
+        //private void button1_Click(object sender, EventArgs e)
+        //{
+        //    Byte[] OUTBuffer = new byte[65];	//Allocate a memory buffer equal to the OUT endpoint size + 1
+        //    Byte[] INBuffer = new byte[65];		//Allocate a memory buffer equal to the IN endpoint size + 1
+        //    uint BytesWritten = 0;
+        //    uint BytesRead = 0;
             
-           // System.DateTime currentTime = new System.DateTime();
-            time1 = DateTime.Now;
+        //   // System.DateTime currentTime = new System.DateTime();
+        //    time1 = DateTime.Now;
 
            
-            if (AttachedState == true)	//Do not try to use the read/write handles unless the USB device is attached and ready
-            {
-                OUTBuffer[0] = 0;	//The first byte is the "Report ID" and does not get sent over the USB bus.  Always set = 0.
-                OUTBuffer[1] = 0x00;	//READ_POT command (see the firmware source code), gets 10-bit ADC Value
-                OUTBuffer[2] = 0x00;
-                OUTBuffer[3] = 0x00;    //LED on/off¿ØÖÆÎ»        
+        //    if (AttachedState == true)	//Do not try to use the read/write handles unless the USB device is attached and ready
+        //    {
+        //        OUTBuffer[0] = 0;	//The first byte is the "Report ID" and does not get sent over the USB bus.  Always set = 0.
+        //        OUTBuffer[1] = 0x00;	//READ_POT command (see the firmware source code), gets 10-bit ADC Value
+        //        OUTBuffer[2] = 0x00;
+        //        OUTBuffer[3] = 0x00;    //LED on/off¿ØÖÆÎ»        
                
-                for (uint i = 4; i < 65; i++)
-                    OUTBuffer[i] =0;                
+        //        for (uint i = 4; i < 65; i++)
+        //            OUTBuffer[i] =0;                
                 
-                //To get the ADCValue, first, we send a packet with our "READ_POT" command in it.
-                if (WriteFile(WriteHandleToUSBDevice, OUTBuffer, 65, ref BytesWritten, IntPtr.Zero))	//Blocking function, unless an "overlapped" structure is used
-                {
-                   //  button2_Click(null,null);
-                }
-            }
-            time2 = DateTime.Now;
-            time_temp = time2 - time1;
-            label1.Text = string.Format("{0}Ãë{1}ºÁÃë", time_temp.Seconds, time_temp.Milliseconds);
+        //        //To get the ADCValue, first, we send a packet with our "READ_POT" command in it.
+        //        if (WriteFile(WriteHandleToUSBDevice, OUTBuffer, 65, ref BytesWritten, IntPtr.Zero))	//Blocking function, unless an "overlapped" structure is used
+        //        {
+        //           //  button2_Click(null,null);
+        //        }
+        //    }
+        //    time2 = DateTime.Now;
+        //    time_temp = time2 - time1;
+        //    label1.Text = string.Format("{0}Ãë{1}ºÁÃë", time_temp.Seconds, time_temp.Milliseconds);
             
-        }
+        //}
 
-        private void button2_Click(object sender, EventArgs e)
-        {
+        //private void button2_Click(object sender, EventArgs e)
+        //{
             
-        }
+        //}
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-            Byte[] OUTBuffer = new byte[65];	//Allocate a memory buffer equal to the OUT endpoint size + 1
-            Byte[] INBuffer = new byte[65];		//Allocate a memory buffer equal to the IN endpoint size + 1
-            uint BytesWritten = 0;
-            uint BytesRead = 0;
+        //private void button3_Click(object sender, EventArgs e)
+        //{
+        //    Byte[] OUTBuffer = new byte[65];	//Allocate a memory buffer equal to the OUT endpoint size + 1
+        //    Byte[] INBuffer = new byte[65];		//Allocate a memory buffer equal to the IN endpoint size + 1
+        //    uint BytesWritten = 0;
+        //    uint BytesRead = 0;
 
 
-            if (AttachedState == true)	//Do not try to use the read/write handles unless the USB device is attached and ready
-            {
-                //Get ANxx/POT Voltage value from the microcontroller firmware.  Note: some demo boards may not have a pot
-                //on them.  In this case, the firmware may be configured to read an ANxx I/O pin voltage with the ADC
-                //instead.  If this is the case, apply a proper voltage to the pin.  See the firmware for exact implementation.
-                OUTBuffer[0] = 0;	//The first byte is the "Report ID" and does not get sent over the USB bus.  Always set = 0.
-                OUTBuffer[1] = 0x00;	//READ_POT command (see the firmware source code), gets 10-bit ADC Value
-                OUTBuffer[2] = 0x00;
-                OUTBuffer[3] = 0x01;    //LED on/off¿ØÖÆÎ»          
+        //    if (AttachedState == true)	//Do not try to use the read/write handles unless the USB device is attached and ready
+        //    {
+        //        //Get ANxx/POT Voltage value from the microcontroller firmware.  Note: some demo boards may not have a pot
+        //        //on them.  In this case, the firmware may be configured to read an ANxx I/O pin voltage with the ADC
+        //        //instead.  If this is the case, apply a proper voltage to the pin.  See the firmware for exact implementation.
+        //        OUTBuffer[0] = 0;	//The first byte is the "Report ID" and does not get sent over the USB bus.  Always set = 0.
+        //        OUTBuffer[1] = 0x00;	//READ_POT command (see the firmware source code), gets 10-bit ADC Value
+        //        OUTBuffer[2] = 0x00;
+        //        OUTBuffer[3] = 0x01;    //LED on/off¿ØÖÆÎ»          
                 
-                for (uint i =4; i < 65; i++)
-                    OUTBuffer[i] = 0;                
+        //        for (uint i =4; i < 65; i++)
+        //            OUTBuffer[i] = 0;                
 
-                //To get the ADCValue, first, we send a packet with our "READ_POT" command in it.
-                if (WriteFile(WriteHandleToUSBDevice, OUTBuffer, 65, ref BytesWritten, IntPtr.Zero))	//Blocking function, unless an "overlapped" structure is used
-                {
-                   // button2_Click(null, null);
-                }
-            }
-        }
+        //        //To get the ADCValue, first, we send a packet with our "READ_POT" command in it.
+        //        if (WriteFile(WriteHandleToUSBDevice, OUTBuffer, 65, ref BytesWritten, IntPtr.Zero))	//Blocking function, unless an "overlapped" structure is used
+        //        {
+        //           // button2_Click(null, null);
+        //        }
+        //    }
+        //}
 
-        private void ANxVoltageToolTip_Popup(object sender, PopupEventArgs e)
-        {
+        //private void ANxVoltageToolTip_Popup(object sender, PopupEventArgs e)
+        //{
 
-        }
+        //}
 
-        private void button4_Click(object sender, EventArgs e)
-        {
+        //private void button4_Click(object sender, EventArgs e)
+        //{
            
-        }
+        //}
 
-        private void button5_Click(object sender, EventArgs e)
-        {
-        }
+        //private void button5_Click(object sender, EventArgs e)
+        //{
+        //}
 
-        private void button6_Click(object sender, EventArgs e)
-        {
+        //private void button6_Click(object sender, EventArgs e)
+        //{
            
-        }
+        //}
 
-        private void button7_Click(object sender, EventArgs e)
-        {
-            int i;
-            time1 = DateTime.Now;
-            for (i = 0; i < 100; i++)
-            {
-                button3_Click(null,null);
+        //private void button7_Click(object sender, EventArgs e)
+        //{
+        //    int i;
+        //    time1 = DateTime.Now;
+        //    for (i = 0; i < 100; i++)
+        //    {
+        //        //button3_Click(null,null);
 
-            }
-            time2 = DateTime.Now;
-            time_temp = time2 - time1;
-            label1.Text = string.Format("{0}Ãë{1}ºÁÃë", time_temp.Seconds, time_temp.Milliseconds);
-        }
+        //    }
+        //    time2 = DateTime.Now;
+        //    time_temp = time2 - time1;
+        //    label1.Text = string.Format("{0}Ãë{1}ºÁÃë", time_temp.Seconds, time_temp.Milliseconds);
+        //}
 
         private void chart1_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            button1_Click(null, null);
-        }
+        //private void timer1_Tick(object sender, EventArgs e)
+        //{
+        //    button1_Click(null, null);
+        //}
 
-        private void button2_Click_1(object sender, EventArgs e)
-        {
-            int x;
-            try
-            {
-                x = Convert.ToInt32(comboBox2.Text);
-                if (x<=1000)
-                {
-                    timer1.Interval = 1000/x;
-                    timer1.Enabled = true;
-                }
+        //private void button2_Click_1(object sender, EventArgs e)
+        //{
+        //    int x;
+        //    try
+        //    {
+        //        x = Convert.ToInt32(comboBox2.Text);
+        //        if (x<=1000)
+        //        {
+        //            timer1.Interval = 1000/x;
+        //            timer1.Enabled = true;
+        //        }
                 
-            }
-            catch (System.Exception ex)
-            {
+        //    }
+        //    catch (System.Exception ex)
+        //    {
             	
-            }
+        //    }
             
-        }
+        //}
 
-        private void button4_Click_1(object sender, EventArgs e)
-        {
-            timer1.Enabled = false;
-        }
+        //private void button4_Click_1(object sender, EventArgs e)
+        //{
+        //    timer1.Enabled = false;
+        //}
 
-        private void button5_Click_1(object sender, EventArgs e)
-        {
-            chart1.Series["Series1"].Points.Clear();
-            chart1.ChartAreas[0].AxisX.Minimum =0;
-            chart1.ChartAreas[0].AxisX.Maximum = lcharPointSet;
-            lchartPoint = 0;
-        }
+        //private void button5_Click_1(object sender, EventArgs e)
+        //{
+        //    //chart1.Series["Series1"].Points.Clear();
+        //    //chart1.ChartAreas[0].AxisX.Minimum =0;
+        //    //chart1.ChartAreas[0].AxisX.Maximum = lcharPointSet;
+        //    //lchartPoint = 0;
+        //}
 
-        private void button6_Click_1(object sender, EventArgs e)
-        {
-            Byte[] OUTBuffer = new byte[65];	//Allocate a memory buffer equal to the OUT endpoint size + 1
-            Byte[] INBuffer = new byte[65];		//Allocate a memory buffer equal to the IN endpoint size + 1
-            uint BytesWritten = 0;
-            uint BytesRead = 0;
+        //private void button6_Click_1(object sender, EventArgs e)
+        //{
+        //    Byte[] OUTBuffer = new byte[65];	//Allocate a memory buffer equal to the OUT endpoint size + 1
+        //    Byte[] INBuffer = new byte[65];		//Allocate a memory buffer equal to the IN endpoint size + 1
+        //    uint BytesWritten = 0;
+        //    uint BytesRead = 0;
 
-            // System.DateTime currentTime = new System.DateTime();
-            time1 = DateTime.Now;
+        //    // System.DateTime currentTime = new System.DateTime();
+        //    time1 = DateTime.Now;
 
 
-            if (AttachedState == true)	//Do not try to use the read/write handles unless the USB device is attached and ready
-            {
-                OUTBuffer[0] = 0;	//The first byte is the "Report ID" and does not get sent over the USB bus.  Always set = 0.
-                OUTBuffer[1] = 0x00;	//READ_POT command (see the firmware source code), gets 10-bit ADC Value
-                OUTBuffer[2] = 0x00;
-                OUTBuffer[3] = 0x00;
+        //    if (AttachedState == true)	//Do not try to use the read/write handles unless the USB device is attached and ready
+        //    {
+        //        OUTBuffer[0] = 0;	//The first byte is the "Report ID" and does not get sent over the USB bus.  Always set = 0.
+        //        OUTBuffer[1] = 0x00;	//READ_POT command (see the firmware source code), gets 10-bit ADC Value
+        //        OUTBuffer[2] = 0x00;
+        //        OUTBuffer[3] = 0x00;
 
-                for (uint i = 4; i < 65; i++)
-                    OUTBuffer[i] = 0;
+        //        for (uint i = 4; i < 65; i++)
+        //            OUTBuffer[i] = 0;
 
-                //To get the ADCValue, first, we send a packet with our "READ_POT" command in it.
-                if (WriteFile(WriteHandleToUSBDevice, OUTBuffer, 65, ref BytesWritten, IntPtr.Zero))	//Blocking function, unless an "overlapped" structure is used
-                {
-                    //  button2_Click(null,null);
-                }
-            }
-            time2 = DateTime.Now;
-            time_temp = time2 - time1;
-            label1.Text = string.Format("{0}Ãë{1}ºÁÃë", time_temp.Seconds, time_temp.Milliseconds);
-        }
+        //        //To get the ADCValue, first, we send a packet with our "READ_POT" command in it.
+        //        if (WriteFile(WriteHandleToUSBDevice, OUTBuffer, 65, ref BytesWritten, IntPtr.Zero))	//Blocking function, unless an "overlapped" structure is used
+        //        {
+        //            //  button2_Click(null,null);
+        //        }
+        //    }
+        //    time2 = DateTime.Now;
+        //    time_temp = time2 - time1;
+        //    label1.Text = string.Format("{0}Ãë{1}ºÁÃë", time_temp.Seconds, time_temp.Milliseconds);
+        //}
 
-        private void comboBox1_SelectedValueChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                lcharPointSet = Convert.ToInt32(comboBox1.Text);
-            }
-            catch (System.Exception ex)
-            {
+        //private void comboBox1_SelectedValueChanged(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        lcharPointSet = Convert.ToInt32(comboBox1.Text);
+        //    }
+        //    catch (System.Exception ex)
+        //    {
             	
-            }
+        //    }
            
-        }
+        //}
 
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            timer1.Enabled = false;
-        }
+        //private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        //{
+        //    timer1.Enabled = false;
+        //}
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
         }
+
+        //private void timer1_Tick(object sender, EventArgs e)
+        //{
+
+        //}
+
+        //private void progressBar1_Click(object sender, EventArgs e)
+        //{
+
+        //}
         //-------------------------------------------------------END CUT AND PASTE BLOCK-------------------------------------------------------------------------------------
         //-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

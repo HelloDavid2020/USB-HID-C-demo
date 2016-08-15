@@ -45,6 +45,6 @@ C:\Users\SmallMoves\Documents\USB-HID-C-demo\obj\x86\Release\HID PnP Demo.pdb
 C:\Users\SmallMoves\Documents\USB-HID-C-demo\bin\x86\Release\HID PnP Demo.exe
 C:\Users\SmallMoves\Documents\USB-HID-C-demo\bin\x86\Release\HID PnP Demo.pdb
 C:\Users\SmallMoves\Documents\USB-HID-C-demo\obj\x86\Release\HID PnP Demo.csprojResolveAssemblyReference.cache
-C:\Users\SmallMoves\Documents\USB-HID-C-demo\obj\x86\Release\HID_PnP_Demo.Form1.resources
 C:\Users\SmallMoves\Documents\USB-HID-C-demo\obj\x86\Release\HID_PnP_Demo.Properties.Resources.resources
 C:\Users\SmallMoves\Documents\USB-HID-C-demo\obj\x86\Release\HID PnP Demo.csproj.GenerateResource.Cache
+C:\Users\SmallMoves\Documents\USB-HID-C-demo\obj\x86\Release\HID_PnP_Demo.USB_HID.resources
