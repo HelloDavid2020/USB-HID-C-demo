@@ -740,7 +740,57 @@ namespace HID_PnP_Demo
                                  {
                                       if (BytesRead > 0)
                                            textBox2.Text = "";
-                                      textBox11.Text=Convert.ToString(   (INBuffer[15] * 256 + INBuffer[14])/100.00  );
+
+//#define CLASS_DC_FOUR_HALF 0x11 /* 直流四位半表头 */ 
+//#define CLASS_DC_THREE_HALF 0x12 /* 直流三位半表头 */
+//---------------------------------------------------------------------------------------
+                                      if (INBuffer[5] == 0x12)
+                                      {
+                                          label9.Text = INBuffer[4].ToString();
+                                      }
+                                      if (INBuffer[5] == 0x11)
+                                      {
+                                          label9.Text = INBuffer[4].ToString();
+                                      }
+ //---------------------------------------------------------------------------------------
+                                      if (INBuffer[9] == 0x12)
+                                      {
+                                          label10.Text = INBuffer[8].ToString();
+                                      }
+                                      if (INBuffer[9] == 0x11)
+                                      {
+                                          label10.Text = INBuffer[8].ToString();
+                                      }
+//---------------------------------------------------------------------------------------
+                                      if (INBuffer[13] == 0x12)
+                                      {
+                                          label11.Text = INBuffer[12].ToString();
+                                      }
+                                      if (INBuffer[13] == 0x11)
+                                      {
+                                          label11.Text = INBuffer[12].ToString();
+                                      }
+ //---------------------------------------------------------------------------------------
+                                      if (INBuffer[17] == 0x12)
+                                      {
+                                          label12.Text = INBuffer[16].ToString();
+                                      }
+                                      if (INBuffer[17] == 0x11)
+                                      {
+                                          label12.Text = INBuffer[16].ToString();
+                                      }
+ //---------------------------------------------------------------------------------------
+
+                                      textBox11.Text = Convert.ToString((INBuffer[15] * 256 + INBuffer[14])/100.00);
+                                      textBox1.Text = Convert.ToString((INBuffer[15] * 256 + INBuffer[14])/100.00);
+
+
+                                      textBox3.Text = Convert.ToString((INBuffer[15] * 256 + INBuffer[14]) / 100.00);
+                                      textBox4.Text = Convert.ToString((INBuffer[15] * 256 + INBuffer[14]) / 100.00);
+
+
+
+
                                       //progressBar1.Value = INBuffer[4] * 256 + INBuffer[5];
                                       for (j = 0; j < BytesRead; j++)
                                             this.textBox2.Text = this.textBox2.Text + " " +INBuffer[j];
@@ -1108,6 +1158,11 @@ namespace HID_PnP_Demo
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             timer1.Enabled = false;
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
         }
         //-------------------------------------------------------END CUT AND PASTE BLOCK-------------------------------------------------------------------------------------
         //-------------------------------------------------------------------------------------------------------------------------------------------------------------------
