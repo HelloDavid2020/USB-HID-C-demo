@@ -64,6 +64,12 @@ namespace HID_PnP_Demo
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -71,12 +77,13 @@ namespace HID_PnP_Demo
             // 
             this.ANxVoltage_lbl.AutoSize = true;
             this.ANxVoltage_lbl.Enabled = false;
-            this.ANxVoltage_lbl.ForeColor = System.Drawing.Color.Yellow;
-            this.ANxVoltage_lbl.Location = new System.Drawing.Point(3, 45);
+            this.ANxVoltage_lbl.Font = new System.Drawing.Font("Î¢ÈíÑÅºÚ", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.ANxVoltage_lbl.ForeColor = System.Drawing.Color.Black;
+            this.ANxVoltage_lbl.Location = new System.Drawing.Point(2, 74);
             this.ANxVoltage_lbl.Name = "ANxVoltage_lbl";
-            this.ANxVoltage_lbl.Size = new System.Drawing.Size(53, 12);
+            this.ANxVoltage_lbl.Size = new System.Drawing.Size(60, 19);
             this.ANxVoltage_lbl.TabIndex = 23;
-            this.ANxVoltage_lbl.Text = "AD¶Á³öÖµ";
+            this.ANxVoltage_lbl.Text = "µçÑ¹±í1";
             // 
             // StatusBox_lbl
             // 
@@ -101,11 +108,11 @@ namespace HID_PnP_Demo
             // 
             this.progressBar1.BackColor = System.Drawing.Color.White;
             this.progressBar1.ForeColor = System.Drawing.Color.Red;
-            this.progressBar1.Location = new System.Drawing.Point(131, 40);
+            this.progressBar1.Location = new System.Drawing.Point(62, 40);
             this.progressBar1.MarqueeAnimationSpeed = 0;
             this.progressBar1.Maximum = 4096;
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(229, 21);
+            this.progressBar1.Size = new System.Drawing.Size(298, 21);
             this.progressBar1.Step = 1;
             this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.progressBar1.TabIndex = 20;
@@ -159,7 +166,7 @@ namespace HID_PnP_Demo
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(5, 94);
+            this.button1.Location = new System.Drawing.Point(12, 220);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(92, 24);
             this.button1.TabIndex = 26;
@@ -169,14 +176,14 @@ namespace HID_PnP_Demo
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(62, 66);
+            this.textBox2.Location = new System.Drawing.Point(77, 250);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(298, 21);
+            this.textBox2.Size = new System.Drawing.Size(383, 21);
             this.textBox2.TabIndex = 29;
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(105, 94);
+            this.button3.Location = new System.Drawing.Point(110, 220);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(92, 24);
             this.button3.TabIndex = 30;
@@ -197,9 +204,10 @@ namespace HID_PnP_Demo
             // 
             // textBox11
             // 
-            this.textBox11.Location = new System.Drawing.Point(62, 39);
+            this.textBox11.Font = new System.Drawing.Font("Î¢ÈíÑÅºÚ", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox11.Location = new System.Drawing.Point(62, 70);
             this.textBox11.Name = "textBox11";
-            this.textBox11.Size = new System.Drawing.Size(63, 21);
+            this.textBox11.Size = new System.Drawing.Size(63, 26);
             this.textBox11.TabIndex = 50;
             // 
             // button7
@@ -222,14 +230,14 @@ namespace HID_PnP_Demo
             this.chart1.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
             this.chart1.Legends.Add(legend1);
-            this.chart1.Location = new System.Drawing.Point(5, 120);
+            this.chart1.Location = new System.Drawing.Point(5, 277);
             this.chart1.Name = "chart1";
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
             series1.Legend = "Legend1";
             series1.Name = "Series1";
             this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(515, 283);
+            this.chart1.Size = new System.Drawing.Size(578, 351);
             this.chart1.TabIndex = 53;
             this.chart1.Text = "chart1";
             this.chart1.Click += new System.EventHandler(this.chart1_Click);
@@ -238,7 +246,7 @@ namespace HID_PnP_Demo
             // 
             this.PushbuttonState_lbl.AutoSize = true;
             this.PushbuttonState_lbl.Enabled = false;
-            this.PushbuttonState_lbl.Location = new System.Drawing.Point(205, 142);
+            this.PushbuttonState_lbl.Location = new System.Drawing.Point(408, 164);
             this.PushbuttonState_lbl.Name = "PushbuttonState_lbl";
             this.PushbuttonState_lbl.Size = new System.Drawing.Size(155, 12);
             this.PushbuttonState_lbl.TabIndex = 25;
@@ -248,9 +256,9 @@ namespace HID_PnP_Demo
             // ToggleLEDs_btn
             // 
             this.ToggleLEDs_btn.Enabled = false;
-            this.ToggleLEDs_btn.Location = new System.Drawing.Point(86, 138);
+            this.ToggleLEDs_btn.Location = new System.Drawing.Point(208, 220);
             this.ToggleLEDs_btn.Name = "ToggleLEDs_btn";
-            this.ToggleLEDs_btn.Size = new System.Drawing.Size(96, 21);
+            this.ToggleLEDs_btn.Size = new System.Drawing.Size(98, 24);
             this.ToggleLEDs_btn.TabIndex = 24;
             this.ToggleLEDs_btn.Text = "ToggleLED(s)";
             this.ToggleLEDs_btn.UseVisualStyleBackColor = true;
@@ -261,7 +269,7 @@ namespace HID_PnP_Demo
             // 
             this.label2.AutoSize = true;
             this.label2.ForeColor = System.Drawing.Color.Yellow;
-            this.label2.Location = new System.Drawing.Point(3, 69);
+            this.label2.Location = new System.Drawing.Point(12, 253);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(59, 12);
             this.label2.TabIndex = 54;
@@ -274,7 +282,7 @@ namespace HID_PnP_Demo
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(385, 94);
+            this.button2.Location = new System.Drawing.Point(385, 121);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(64, 24);
             this.button2.TabIndex = 55;
@@ -284,7 +292,7 @@ namespace HID_PnP_Demo
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(454, 94);
+            this.button4.Location = new System.Drawing.Point(454, 121);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(66, 24);
             this.button4.TabIndex = 56;
@@ -294,7 +302,7 @@ namespace HID_PnP_Demo
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(311, 94);
+            this.button5.Location = new System.Drawing.Point(311, 121);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(68, 24);
             this.button5.TabIndex = 57;
@@ -314,7 +322,7 @@ namespace HID_PnP_Demo
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(228, 94);
+            this.button6.Location = new System.Drawing.Point(312, 220);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(77, 24);
             this.button6.TabIndex = 59;
@@ -379,12 +387,78 @@ namespace HID_PnP_Demo
             this.label5.TabIndex = 63;
             this.label5.Text = "¶ÁÖµÆµÂÊ(Hz)";
             // 
+            // textBox1
+            // 
+            this.textBox1.Font = new System.Drawing.Font("Î¢ÈíÑÅºÚ", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox1.Location = new System.Drawing.Point(62, 96);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(63, 26);
+            this.textBox1.TabIndex = 65;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Enabled = false;
+            this.label6.Font = new System.Drawing.Font("Î¢ÈíÑÅºÚ", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label6.ForeColor = System.Drawing.Color.Black;
+            this.label6.Location = new System.Drawing.Point(2, 101);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(60, 19);
+            this.label6.TabIndex = 64;
+            this.label6.Text = "µçÑ¹±í2";
+            // 
+            // textBox3
+            // 
+            this.textBox3.Font = new System.Drawing.Font("Î¢ÈíÑÅºÚ", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox3.Location = new System.Drawing.Point(62, 123);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(63, 26);
+            this.textBox3.TabIndex = 67;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Enabled = false;
+            this.label7.Font = new System.Drawing.Font("Î¢ÈíÑÅºÚ", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label7.ForeColor = System.Drawing.Color.Black;
+            this.label7.Location = new System.Drawing.Point(2, 128);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(60, 19);
+            this.label7.TabIndex = 66;
+            this.label7.Text = "µçÁ÷±í1";
+            // 
+            // textBox4
+            // 
+            this.textBox4.Font = new System.Drawing.Font("Î¢ÈíÑÅºÚ", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox4.Location = new System.Drawing.Point(62, 150);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(63, 26);
+            this.textBox4.TabIndex = 69;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Enabled = false;
+            this.label8.Font = new System.Drawing.Font("Î¢ÈíÑÅºÚ", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label8.ForeColor = System.Drawing.Color.Black;
+            this.label8.Location = new System.Drawing.Point(2, 155);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(60, 19);
+            this.label8.TabIndex = 68;
+            this.label8.Text = "µçÁ÷±í2";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gray;
-            this.ClientSize = new System.Drawing.Size(525, 415);
+            this.ClientSize = new System.Drawing.Size(588, 640);
+            this.Controls.Add(this.textBox4);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.comboBox2);
@@ -453,6 +527,12 @@ namespace HID_PnP_Demo
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.Label label8;
     }
 }
 

@@ -133,6 +133,7 @@ namespace HID_PnP_Demo
         DateTime time1, time2;
         TimeSpan time_temp;
         long lchartPoint,lcharPointSet;
+        int readbyteNums = 21;
 
         //Various structure definitions for structures that this code will be using
         internal struct SP_DEVICE_INTERFACE_DATA
@@ -731,7 +732,7 @@ namespace HID_PnP_Demo
 
 
                         //myevent.WaitOne(300);
-                         if (ReadFileManagedBuffer(ReadHandleToUSBDevice, INBuffer, 65, ref BytesRead, IntPtr.Zero))		//Blocking function, unless an "overlapped" structure is used	
+                        if (ReadFileManagedBuffer(ReadHandleToUSBDevice, INBuffer, 22, ref BytesRead, IntPtr.Zero))		//Blocking function, unless an "overlapped" structure is used	
                           {
                                               //      myevent.WaitOne(300);
                                 lchartPoint++;
@@ -739,15 +740,15 @@ namespace HID_PnP_Demo
                                  {
                                       if (BytesRead > 0)
                                            textBox2.Text = "";
-                                      textBox11.Text=Convert.ToString( INBuffer[4] * 256 + INBuffer[5]);
-                                      progressBar1.Value = INBuffer[4] * 256 + INBuffer[5];
+                                      textBox11.Text=Convert.ToString(   (INBuffer[15] * 256 + INBuffer[14])/100.00  );
+                                      //progressBar1.Value = INBuffer[4] * 256 + INBuffer[5];
                                       for (j = 0; j < BytesRead; j++)
                                             this.textBox2.Text = this.textBox2.Text + " " +INBuffer[j];
-                                      //System.DateTime currentTime = new System.DateTime();
-                                     chart1.Series["Series1"].Points.AddY( INBuffer[4] * 256 + INBuffer[5]);
+                                      ////System.DateTime currentTime = new System.DateTime();
+                                      chart1.Series["Series1"].Points.AddY(INBuffer[15] * 256 + INBuffer[14]);
                                       if (lchartPoint > lcharPointSet)
                                       {
-                                          
+
                                           chart1.ChartAreas[0].AxisX.Minimum = lchartPoint - lcharPointSet;
                                           chart1.ChartAreas[0].AxisX.Maximum = lchartPoint;
                                       }
