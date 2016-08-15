@@ -28,7 +28,6 @@ namespace HID_PnP_Demo
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.ANxVoltage_lbl = new System.Windows.Forms.Label();
             this.StatusBox_lbl = new System.Windows.Forms.Label();
             this.StatusBox_txtbx = new System.Windows.Forms.TextBox();
@@ -47,7 +46,6 @@ namespace HID_PnP_Demo
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // ANxVoltage_lbl
@@ -286,7 +284,6 @@ namespace HID_PnP_Demo
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Timer timer1;
     }
 }
 
