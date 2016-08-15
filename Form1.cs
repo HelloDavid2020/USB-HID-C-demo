@@ -731,35 +731,31 @@ namespace HID_PnP_Demo
 
 
                         //myevent.WaitOne(300);
-                        //if (ReadFileManagedBuffer(ReadHandleToUSBDevice, INBuffer, 65, ref BytesRead, IntPtr.Zero))		//Blocking function, unless an "overlapped" structure is used	
-                        //{
-                        //                    //      myevent.WaitOne(300);
-                        //    lchartPoint++;
-                        //        this.textBox2.Invoke(new MethodInvoker(delegate
-                        //        {
-                        //            if (BytesRead > 0)
-                        //                textBox2.Text = "";
-                        //            textBox11.Text=Convert.ToString( INBuffer[4] * 256 + INBuffer[5]);
-                        //            progressBar1.Value = INBuffer[4] * 256 + INBuffer[5];
-                        //            for (j = 0; j < BytesRead; j++)
-                        //                this.textBox2.Text = this.textBox2.Text + " " +INBuffer[j];
-                        //            //System.DateTime currentTime = new System.DateTime();
-                        //            chart1.Series["Series1"].Points.AddY( INBuffer[4] * 256 + INBuffer[5]);
-                        //            if (lchartPoint > lcharPointSet)
-                        //            {
+                         if (ReadFileManagedBuffer(ReadHandleToUSBDevice, INBuffer, 65, ref BytesRead, IntPtr.Zero))		//Blocking function, unless an "overlapped" structure is used	
+                          {
+                                              //      myevent.WaitOne(300);
+                                lchartPoint++;
+                                 this.textBox2.Invoke(new MethodInvoker(delegate
+                                 {
+                                      if (BytesRead > 0)
+                                           textBox2.Text = "";
+                                      textBox11.Text=Convert.ToString( INBuffer[4] * 256 + INBuffer[5]);
+                                      progressBar1.Value = INBuffer[4] * 256 + INBuffer[5];
+                                      for (j = 0; j < BytesRead; j++)
+                                            this.textBox2.Text = this.textBox2.Text + " " +INBuffer[j];
+                                      //System.DateTime currentTime = new System.DateTime();
+                                     chart1.Series["Series1"].Points.AddY( INBuffer[4] * 256 + INBuffer[5]);
+                                      if (lchartPoint > lcharPointSet)
+                                      {
                                           
-                        //                chart1.ChartAreas[0].AxisX.Minimum = lchartPoint - lcharPointSet;
-                        //                chart1.ChartAreas[0].AxisX.Maximum = lchartPoint;
-                        //            }
+                                          chart1.ChartAreas[0].AxisX.Minimum = lchartPoint - lcharPointSet;
+                                          chart1.ChartAreas[0].AxisX.Maximum = lchartPoint;
+                                      }
                                       
-                        //        }));
-                        //}
-                        if (ReadFileManagedBuffer(ReadHandleToUSBDevice, INBuffer, 65, ref BytesRead, IntPtr.Zero))		//Blocking function, unless an "overlapped" structure is used	
-                        {
-                            for (j = 0; j < BytesRead; j++)
+                                  }));
+                           }
+                        
 
-                                textBox2.Text = textBox2.Text + " " + INBuffer[j];
-                        }
                         //Check if this thread should send a Toggle LED(s) command to the firmware.  ToggleLEDsPending will get set
                         //by the ToggleLEDs_btn click event handler function if the user presses the button on the form.
                     //    if (ToggleLEDsPending == true)
@@ -1114,36 +1110,7 @@ namespace HID_PnP_Demo
         }
         //-------------------------------------------------------END CUT AND PASTE BLOCK-------------------------------------------------------------------------------------
         //-------------------------------------------------------------------------------------------------------------------------------------------------------------------
-     //十六进制字符串转换为字节流
-void HexStrToByte(char* source, char* dest, int sourceLen)
-{
-    short i;
-    char highByte, lowByte;
-    
-    for (i = 0; i < sourceLen; i += 2)
-    {
-        highByte = toupper(source[i]);
-        lowByte  = toupper(source[i + 1]);
 
-        if (highByte > 0x39)
-            highByte -= 0x37;
-        else
-            highByte -= 0x30;
-
-        if (lowByte > 0x39)
-            lowByte -= 0x37;
-        else
-            lowByte -= 0x30;
-
-        dest[i / 2] = (highByte << 4) | lowByte;
-    }
-    return ;
-}
 
     } //public partial class Form1 : Form
 } //namespace HID_PnP_Demo
-
-
-
-
-
